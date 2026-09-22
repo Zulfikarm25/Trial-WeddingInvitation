@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Wedding of Groom & Bride</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+
+/* ============================================================
+   CONFIG — edit the values in the CONFIG object further down
+   in the <script> block. That's the only place you need to
+   touch to personalize this invitation.
+   ============================================================ */
+
+:root{
+  --ivory:#FAF6EE;
+  --ivory-2:#F3ECDC;
+  --ink:#1F3A2E;
+  --ink-2:#16281F;
+  --gold:#B08D46;
+  --gold-soft:#D9C08B;
+  --rose:#D8B4A0;
+  --rose-soft:#F1E1D8;
+  --charcoal:#2B2620;
+  --charcoal-soft:#5C5648;
+  --shadow: 0 12px 40px rgba(31,58,46,0.14);
+  --maxw: 640px;
+}
+
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth; scroll-padding-top: env(safe-area-inset-top,0px);}
+body{
+  background:var(--ivory);
+  color:var(--charcoal);
+  font-family:'Work Sans', sans-serif;
+  font-weight:400;
+  line-height:1.6;
+  overflow-x:hidden;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+h1,h2,h3,.serif{ font-family:'Fraunces', serif; font-weight:500; color:var(--ink); }
+img{max-width:100%; display:block;}
+a{color:inherit;}
+.container{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
+.section{padding:88px 0; position:relative;}
+.section-inner{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
+
+.divider{
+  width:100%; max-width:220px; height:34px; margin:22px auto;
+  display:block;
+}
+.divider path{ stroke:var(--gold); stroke-width:1.2; fill:none; }
+
+.eyebrow{
+  font-family:'Fraunces', serif;
+  font-style:italic;
+  font-weight:400;
+  font-size:1.05rem;
+  color:var(--gold);
+  letter-spacing:0.02em;
+}
+
+/* reveal-on-scroll: single, restrained pattern */
+.reveal{ opacity:0; transform:translateY(18px); transition:opacity 0.9s ease, transform 0.9s ease; }
+.reveal.in{ opacity:1; transform:translateY(0); }
+@media (prefers-reduced-motion: reduce){
+  .reveal{ opacity:1; transform:none; transition:none; }
+}
+
+/* ---------------- COVER ---------------- */
+#cover{
+  min-height:100vh;
+  min-height:100dvh;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(176,141,70,0.14), transparent 55%),
+    linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%);
+  color:var(--ivory);
+  padding:40px 28px calc(40px + env(safe-area-inset-bottom,0px));
+  position:relative;
+}
+#cover .kicker{
+  font-family:'Fraunces', serif; font-style:italic; font-size:1.05rem;
+  color:var(--gold-soft); margin-bottom:18px; opacity:0; animation:fadeIn 1s ease 0.2s forwards;
+}
+#cover .names{
+  font-size:clamp(2.6rem, 11vw, 4.4rem);
+  color:var(--ivory);
+  line-height:1.08;
+  opacity:0; animation:fadeIn 1.1s ease 0.5s forwards;
+}
+#cover .names .amp{
+  display:block; font-style:italic; color:var(--gold-soft); font-size:0.55em; margin:6px 0;
+}
+#cover .date-line{
+  margin-top:26px; font-size:0.95rem; letter-spacing:0.04em; color:var(--rose-soft);
+  opacity:0; animation:fadeIn 1s ease 0.9s forwards;
+}
+#cover .invite-note{
+  margin-top:40px; font-size:0.85rem; color:rgba(250,246,238,0.55);
+  opacity:0; animation:fadeIn 1s ease 1.2s forwards;
+}
+@keyframes fadeIn{ to{opacity:1;} }
+
+.scroll-hint{
+  position:absolute; bottom:calc(28px + env(safe-area-inset-bottom,0px));
+  left:50%; transform:translateX(-50%);
+  font-size:0.75rem; color:rgba(250,246,238,0.5); letter-spacing:0.08em;
+  animation:bob 2.2s ease-in-out infinite;
+}
+@keyframes bob{ 0%,100%{transform:translate(-50%,0);} 50%{transform:translate(-50%,6px);} }
+
+/* ---------------- COUPLE ---------------- */
+#couple{ text-align:center; }
+.couple-grid{ display:flex; flex-direction:column; gap:56px; margin-top:40px; }
+.person .portrait{
+  width:148px; height:148px; border-radius:50%; margin:0 auto 20px;
+  background:linear-gradient(145deg, var(--rose-soft), var(--ivory-2));
+  border:1px solid var(--gold-soft);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Fraunces', serif; font-style:italic; color:var(--gold);
+  font-size:0.8rem; text-align:center; padding:10px;
+  overflow:hidden;
+}
+.person .portrait img{ width:100%; height:100%; object-fit:cover; }
+.person h3{ font-size:1.7rem; margin-bottom:6px; }
+.person .parents{ font-size:0.88rem; color:var(--charcoal-soft); line-height:1.7; }
+.couple-and{ font-family:'Fraunces', serif; font-style:italic; color:var(--gold); font-size:1.4rem; }
+
+/* ---------------- STORY ---------------- */
+#story{ background:var(--ivory-2); }
+.story-item{
+  display:flex; gap:22px; align-items:flex-start; margin-bottom:44px; text-align:left;
+}
+.story-item:last-child{ margin-bottom:0; }
+.story-item:nth-child(even){ flex-direction:row-reverse; text-align:right; }
+.story-item .mark{
+  flex:0 0 auto; width:44px; height:44px; border-radius:50%;
+  border:1px solid var(--gold); display:flex; align-items:center; justify-content:center;
+  font-family:'Fraunces', serif; font-style:italic; color:var(--gold); font-size:0.95rem;
+}
+.story-item .body h3{ font-size:1.25rem; margin-bottom:6px; }
+.story-item .body p{ font-size:0.92rem; color:var(--charcoal-soft); }
+
+/* ---------------- COUNTDOWN ---------------- */
+#countdown{ text-align:center; }
+.countdown-grid{
+  display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:36px;
+}
+.countdown-grid .cell{
+  background:var(--ink); color:var(--ivory); border-radius:10px; padding:18px 6px;
+  box-shadow:var(--shadow);
+}
+.countdown-grid .num{ font-family:'Fraunces', serif; font-size:clamp(1.6rem,6vw,2.3rem); color:var(--gold-soft); }
+.countdown-grid .label{ font-size:0.68rem; letter-spacing:0.06em; margin-top:4px; color:rgba(250,246,238,0.7); }
+
+/* ---------------- EVENTS ---------------- */
+.event-card{
+  border:1px solid var(--gold-soft); border-radius:14px; padding:30px 26px; margin-bottom:22px;
+  background:var(--ivory); text-align:center;
+}
+.event-card:last-child{ margin-bottom:0; }
+.event-card h3{ font-size:1.4rem; }
+.event-card .when{ margin:10px 0 4px; font-size:0.98rem; }
+.event-card .where{ font-size:0.9rem; color:var(--charcoal-soft); margin-bottom:16px; }
+.btn{
+  display:inline-block; padding:12px 26px; border-radius:999px; text-decoration:none;
+  font-size:0.85rem; letter-spacing:0.03em; border:1px solid var(--ink);
+  color:var(--ink); transition:background 0.25s ease, color 0.25s ease;
+}
+.btn:active{ background:var(--ink); color:var(--ivory); }
+.btn + .btn{ margin-left:10px; }
+.btn.solid{ background:var(--ink); color:var(--ivory); }
+.btn.solid:active{ background:var(--ink-2); }
+
+/* ---------------- MAP ---------------- */
+#map-section{ background:var(--ivory-2); text-align:center; }
+.map-card{
+  border-radius:16px; overflow:hidden; box-shadow:var(--shadow); background:var(--ink);
+  color:var(--ivory); padding:34px 26px; text-decoration:none; display:block;
+}
+.map-card .venue-name{ font-size:1.3rem; color:var(--ivory); margin-bottom:8px; }
+.map-card .venue-addr{ font-size:0.9rem; color:rgba(250,246,238,0.75); margin-bottom:18px; }
+.map-card .tap{ font-size:0.78rem; color:var(--gold-soft); letter-spacing:0.04em; }
+
+/* ---------------- RSVP ---------------- */
+#rsvp{ text-align:center; }
+form#rsvp-form{ text-align:left; margin-top:32px; display:flex; flex-direction:column; gap:18px; }
+.field label{ display:block; font-size:0.82rem; color:var(--charcoal-soft); margin-bottom:6px; }
+.field input[type=text], .field input[type=number], .field textarea{
+  width:100%; border:1px solid var(--gold-soft); background:var(--ivory);
+  border-radius:8px; padding:12px 14px; font-family:'Work Sans', sans-serif; font-size:0.95rem;
+  color:var(--charcoal);
+}
+.field input:focus, .field textarea:focus, .attend-toggle button:focus-visible, .btn:focus-visible, .submit-btn:focus-visible{
+  outline:2px solid var(--ink); outline-offset:2px;
+}
+.field textarea{ min-height:96px; resize:vertical; }
+.attend-toggle{ display:flex; gap:10px; }
+.attend-toggle button{
+  flex:1; padding:12px 8px; border-radius:8px; border:1px solid var(--gold-soft);
+  background:var(--ivory); font-family:'Work Sans', sans-serif; font-size:0.88rem; color:var(--charcoal);
+}
+.attend-toggle button.active{ background:var(--ink); border-color:var(--ink); color:var(--ivory); }
+.guest-count-wrap{ display:none; }
+.submit-btn{
+  margin-top:6px; padding:14px; border-radius:999px; border:none; background:var(--ink);
+  color:var(--ivory); font-family:'Work Sans', sans-serif; font-size:0.95rem; letter-spacing:0.02em;
+}
+.submit-btn:disabled{ opacity:0.6; }
+#rsvp-status{ margin-top:14px; font-size:0.88rem; min-height:1.2em; }
+#rsvp-status.ok{ color:var(--ink); }
+#rsvp-status.err{ color:#8a3b2b; }
+
+/* ---------------- WISHES ---------------- */
+#wishes{ background:var(--ivory-2); }
+.wishes-list{ margin-top:32px; display:flex; flex-direction:column; gap:16px; max-height:520px; overflow-y:auto; padding-right:4px; }
+.wish-card{
+  background:var(--ivory); border-radius:12px; padding:18px 20px; border-left:3px solid var(--gold);
+}
+.wish-card .who{ font-family:'Fraunces', serif; font-style:italic; color:var(--ink); font-size:1.02rem; margin-bottom:4px; }
+.wish-card .status{ font-size:0.72rem; color:var(--gold); margin-bottom:6px; }
+.wish-card .msg{ font-size:0.92rem; color:var(--charcoal-soft); }
+.wishes-empty{ text-align:center; color:var(--charcoal-soft); font-size:0.9rem; padding:20px 0; }
+#wishes-refresh{
+  margin:18px auto 0; display:block; background:none; border:1px solid var(--gold-soft);
+  color:var(--charcoal-soft); font-family:'Work Sans', sans-serif; font-size:0.8rem;
+  padding:8px 18px; border-radius:999px;
+}
+
+/* ---------------- GIFT ---------------- */
+#gift{ text-align:center; }
+.gift-card{
+  background:linear-gradient(160deg, var(--rose-soft), var(--ivory));
+  border-radius:16px; padding:34px 26px; border:1px solid var(--rose);
+}
+.gift-row{ margin-bottom:18px; }
+.gift-row:last-child{ margin-bottom:0; }
+.gift-row .k{ font-size:0.78rem; color:var(--charcoal-soft); letter-spacing:0.03em; margin-bottom:4px; }
+.gift-row .v{ font-family:'Fraunces', serif; font-size:1.15rem; color:var(--ink); }
+.copy-btn{
+  margin-top:8px; font-size:0.75rem; background:none; border:1px solid var(--gold);
+  color:var(--gold); padding:5px 14px; border-radius:999px;
+}
+
+/* ---------------- CLOSING ---------------- */
+#closing{
+  background:linear-gradient(180deg, var(--ink-2), var(--ink));
+  color:var(--ivory); text-align:center; padding:96px 0;
+}
+#closing h2{ color:var(--ivory); font-size:1.8rem; }
+#closing p{ margin-top:14px; color:rgba(250,246,238,0.75); font-size:0.95rem; max-width:420px; margin-left:auto; margin-right:auto; }
+#closing .signoff{ margin-top:26px; font-family:'Fraunces', serif; font-style:italic; color:var(--gold-soft); font-size:1.3rem; }
+
+/* ---------------- MUSIC BUTTON ---------------- */
+#music-btn{
+  position:fixed; z-index:40; right:18px; bottom:calc(18px + env(safe-area-inset-bottom,0px));
+  width:52px; height:52px; border-radius:50%; border:1px solid var(--gold-soft);
+  background:var(--ink); color:var(--ivory); display:flex; align-items:center; justify-content:center;
+  box-shadow:var(--shadow); font-size:1.3rem;
+}
+#music-btn .disc{ animation:spin 6s linear infinite; animation-play-state:paused; }
+#music-btn.playing .disc{ animation-play-state:running; }
+
+@keyframes spin{ to{ transform:rotate(360deg);} }
+
+/* ---------------- GATE (opening envelope) ---------------- */
+#gate{
+  position:fixed; inset:0; z-index:100; background:var(--ink);
+  display:flex; align-items:center; justify-content:center; flex-direction:column; text-align:center;
+  padding:28px; transition:opacity 0.7s ease, visibility 0.7s ease;
+}
+#gate.hidden{ opacity:0; visibility:hidden; pointer-events:none; }
+#gate .to{ color:var(--gold-soft); font-family:'Fraunces', serif; font-style:italic; font-size:1.1rem; margin-bottom:10px; }
+#gate .names{ color:var(--ivory); font-family:'Fraunces', serif; font-size:2rem; margin-bottom:30px; }
+#open-btn{
+  background:var(--gold); color:var(--ink-2); border:none; padding:14px 32px; border-radius:999px;
+  font-family:'Work Sans', sans-serif; font-size:0.9rem; letter-spacing:0.03em;
+}
+
+::-webkit-scrollbar{ width:6px; }
+::-webkit-scrollbar-thumb{ background:var(--gold-soft); border-radius:4px; }
+
+@media (min-width:720px){
+  .story-item, .story-item:nth-child(even){ flex-direction:row; text-align:left; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============== OPENING GATE ============== -->
+<div id="gate">
+  <div class="to" id="gate-to">Kepada Bapak/Ibu/Saudara/i</div>
+  <div class="names" id="gate-names">Groom &amp; Bride</div>
+  <button id="open-btn">Buka Undangan</button>
+</div>
+
+<!-- ============== COVER ============== -->
+<section id="cover">
+  <div class="kicker">The Wedding of</div>
+  <h1 class="names"><span id="cover-groom">Groom</span><span class="amp">&amp;</span><span id="cover-bride">Bride</span></h1>
+  <div class="date-line" id="cover-date">Wedding Date · Venue</div>
+  <div class="invite-note">Dengan penuh sukacita, kami mengundang Anda untuk hadir di hari bahagia kami</div>
+  <div class="scroll-hint">gulir ke bawah</div>
+</section>
+
+<!-- ============== COUPLE ============== -->
+<section class="section" id="couple">
+  <div class="section-inner reveal">
+    <div class="eyebrow">Mempelai</div>
+    <svg class="divider" viewBox="0 0 220 34"><path d="M10 17 C60 2, 90 30, 110 17 S170 2, 210 17"/></svg>
+    <div class="couple-grid">
+      <div class="person">
+        <div class="portrait" id="groom-photo">Foto<br>Mempelai Pria</div>
+        <h3 id="groom-name">Groom Name</h3>
+        <p class="parents" id="groom-parents">Putra dari<br>Bapak XXX &amp; Ibu XXX</p>
+      </div>
+      <div class="couple-and">&amp;</div>
+      <div class="person">
+        <div class="portrait" id="bride-photo">Foto<br>Mempelai Wanita</div>
+        <h3 id="bride-name">Bride Name</h3>
+        <p class="parents" id="bride-parents">Putri dari<br>Bapak XXX &amp; Ibu XXX</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== STORY ============== -->
+<section class="section" id="story">
+  <div class="section-inner reveal">
+    <div class="eyebrow" style="text-align:center;">Our Love Story</div>
+    <svg class="divider" style="margin-left:auto;margin-right:auto;" viewBox="0 0 220 34"><path d="M10 17 C60 2, 90 30, 110 17 S170 2, 210 17"/></svg>
+    <div style="margin-top:40px;">
+      <div class="story-item">
+        <div class="mark">1</div>
+        <div class="body"><h3>Awal Bertemu</h3><p id="story-1">XXX</p></div>
+      </div>
+      <div class="story-item">
+        <div class="mark">2</div>
+        <div class="body"><h3>Nembung</h3><p id="story-2">XXX</p></div>
+      </div>
+      <div class="story-item">
+        <div class="mark">3</div>
+        <div class="body"><h3>Menikah</h3><p id="story-3">XXX</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== COUNTDOWN ============== -->
+<section class="section" id="countdown">
+  <div class="section-inner reveal">
+    <div class="eyebrow">Menghitung Hari</div>
+    <svg class="divider" viewBox="0 0 220 34"><path d="M10 17 C60 2, 90 30, 110 17 S170 2, 210 17"/></svg>
+    <div class="countdown-grid">
+      <div class="cell"><div class="num" id="cd-days">00</div><div class="label">HARI</div></div>
+      <div class="cell"><div class="num" id="cd-hours">00</div><div class="label">JAM</div></div>
+      <div class="cell"><div class="num" id="cd-mins">00</div><div class="label">MENIT</div></div>
+      <div class="cell"><div class="num" id="cd-secs">00</div><div class="label">DETIK</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== EVENTS ============== -->
+<section class="section" id="events">
+  <div class="section-inner reveal">
+    <div class="eyebrow" style="text-align:center;">Acara</div>
+    <svg class="divider" viewBox="0 0 220 34"><path d="M10 17 C60 2, 90 30, 110 17 S170 2, 210 17"/></svg>
+    <div style="margin-top:36px;">
+      <div class="event-card">
+        <h3>Akad Nikah</h3>
+        <div class="when" id="akad-when">XXX</div>
+        <div class="where" id="akad-where">XXX</div>
+        <a class="btn solid" id="akad-cal-link" href="#" target="_blank" rel="noopener">Simpan ke Kalender</a>
+      </div>
+      <div class="event-card">
+        <h3>Resepsi</h3>
+        <div class="when" id="resepsi-when">XXX</div>
+        <div class="where" id="resepsi-where">XXX</div>
+        <a class="btn solid" id="resepsi-cal-link" href="#" target="_blank" rel="noopener">Simpan ke Kalender</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== MAP ============== -->
+<section class="section" id="map-section">
+  <div class="section-inner reveal">
+    <div class="eyebrow">Lokasi</div>
+    <svg class="divider" viewBox="0 0 220 34"><path d="M10 17 C60 2, 90 30, 110 17 S170 2, 210 17"/></svg>
+    <a class="map-card" id="map-link" href="#" target="_blank" rel="noopener" style="margin-top:32px;">
+      <div class="venue-name" id="venue-name">Venue Name</div>
+      <div class="venue-addr" id="venue-address">XXX</div>
+      <div class="tap">Ketuk untuk membuka Google Maps →</div>
+    </a>
+  </div>
+</section>
+
+<!-- ============== RSVP ============== -->
+<section class="section" id="rsvp">
+  <div class="section-inner reveal">
+    <div class="eyebrow">RSVP</div>
+    <svg class="divider" viewBox="0 0 220 34"><path d="M10 17 C60 2, 90 30, 110 17 S170 2, 210 17"/></svg>
+    <p style="text-align:center; color:var(--charcoal-soft); font-size:0.92rem; margin-top:14px;">
+      Mohon konfirmasi kehadiran Anda sebelum hari-H
+    </p>
+    <form id="rsvp-form">
+      <div class="field">
+        <label for="f-name">Nama Lengkap</label>
+        <input type="text" id="f-name" required maxlength="80" autocomplete="name">
+      </div>
+      <div class="field">
+        <label>Konfirmasi Kehadiran</label>
+        <div class="attend-toggle">
+          <button type="button" data-val="Attending" id="btn-attend">Hadir</button>
+          <button type="button" data-val="Not Attending" id="btn-not-attend">Tidak Hadir</button>
+        </div>
+      </div>
+      <div class="field guest-count-wrap" id="guest-count-wrap">
+        <label for="f-guests">Jumlah Tamu</label>
+        <input type="number" id="f-guests" min="1" max="10" value="1">
+      </div>
+      <div class="field">
+        <label for="f-message">Ucapan &amp; Doa</label>
+        <textarea id="f-message" maxlength="500" placeholder="Tuliskan ucapan dan doa untuk kedua mempelai..."></textarea>
+      </div>
+      <button type="submit" class="submit-btn" id="rsvp-submit">Kirim RSVP</button>
+      <div id="rsvp-status"></div>
+    </form>
+  </div>
+</section>
+
+<!-- ============== WISHES ============== -->
+<section class="section" id="wishes">
+  <div class="section-inner reveal">
+    <div class="eyebrow" style="text-align:center;">Ucapan &amp; Doa</div>
+    <svg class="divider" viewBox="0 0 220 34"><path d="M10 17 C60 2, 90 30, 110 17 S170 2, 210 17"/></svg>
+    <div class="wishes-list" id="wishes-list">
+      <div class="wishes-empty">Memuat ucapan...</div>
+    </div>
+    <button id="wishes-refresh">Muat ulang ucapan</button>
+  </div>
+</section>
+
+<!-- ============== GIFT ============== -->
+<section class="section" id="gift">
+  <div class="section-inner reveal">
+    <div class="eyebrow">Wanna give us some gifts?</div>
+    <svg class="divider" viewBox="0 0 220 34"><path d="M10 17 C60 2, 90 30, 110 17 S170 2, 210 17"/></svg>
+    <p style="color:var(--charcoal-soft); font-size:0.9rem; margin-bottom:24px;">
+      Doa restu Anda adalah hadiah terbesar bagi kami. Namun jika ingin memberi tanda kasih, kami dengan senang hati menerimanya.
+    </p>
+    <div class="gift-card">
+      <div class="gift-row">
+        <div class="k">Nomor Rekening</div>
+        <div class="v" id="bank-account">XXX</div>
+        <button class="copy-btn" data-copy-target="bank-account">Salin</button>
+      </div>
+      <div class="gift-row">
+        <div class="k">Alamat Pengiriman Hadiah</div>
+        <div class="v" id="gift-address" style="font-size:0.95rem;">XXX</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== CLOSING ============== -->
+<section id="closing">
+  <div class="container reveal">
+    <div class="eyebrow" style="color:var(--gold-soft);">Terima Kasih</div>
+    <h2>Kehadiran &amp; doa restu Anda<br>adalah karunia bagi kami</h2>
+    <p>Merupakan kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.</p>
+    <div class="signoff" id="closing-names">Groom &amp; Bride</div>
+  </div>
+</section>
+
+<button id="music-btn" aria-label="Putar musik" aria-pressed="false">
+  <span class="disc">♫</span>
+</button>
+<audio id="bg-audio" loop preload="none">
+  <source src="assets/music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+/* ================================================================
+   CONFIG — this is the ONLY block you should need to edit.
+   Replace every "XXX" with your real wedding details.
+   ================================================================ */
+const CONFIG = {
+  groom: { name: "Muhammad Zulfikar, S.Pd", nickname: "Zulfikar", father: "H. Su'udi", mother: "Hj. Arini" },
+  bride: { name: "Aulin Nurulia, S.Pd., Gr.", nickname: "Aulin", father: "Ali Muksan", mother: "Sri Mariana (alm)" },
+
+  // ISO-like local date strings: "YYYY-MM-DDTHH:MM:SS"
+  akad:     { label: "Akad Nikah", date: "2027-01-15T08:00:00"},
+  resepsi:  { label: "Resepsi",    date: "2027-01-15T13:00:00", venue: "Griptha Hotel"},
+
+  // Countdown targets the earlier of the two events above automatically.
+
+  venueName: "Griptha Hotel",
+  venueAddress: "Jl. AKBP Agil Kusumadya No.100, Jatimakmur, Jati Wetan, Kec. Jati, Kabupaten Kudus, Jawa Tengah 59346",
+  // Paste a Google Maps share link (Maps app > Share > Copy link) OR leave
+  // blank to auto-build a search link from venueAddress.
+  googleMapsUrl: "https://maps.app.goo.gl/BZ7Lhs3mFWKL2N347",
+
+  story: {
+    metAt: "XXX",       // Awal bertemu
+    proposal: "XXX",    // Nembung
+    married: "XXX"      // Menikah
+  },
+
+  gift: {
+    bankAccount: "XXX",
+    address: "XXX"
+  },
+
+  // Paste your deployed Google Apps Script Web App URL here (see setup guide).
+  // Leave empty to run the site in "no backend" preview mode — the RSVP
+  // form and wishes list will show a friendly message instead of erroring.
+  scriptUrl: "https://script.google.com/macros/s/AKfycbzImqSWK_qStPkKgK8mr-UJTENsw_NMLLPtLZmG64XBcGmT5ecLDpKq-fN4oSv6EX53kA/exec"
+};
+
+/* ================================================================
+   Everything below this line renders CONFIG into the page and
+   wires up the interactive behaviour. No edits needed.
+   ================================================================ */
+
+function fmtDateHuman(d){
+  return d.toLocaleDateString('id-ID', { weekday:'long', day:'numeric', month:'long', year:'numeric' }) +
+         ' · ' + d.toLocaleTimeString('id-ID', { hour:'2-digit', minute:'2-digit' }) + ' WIB';
+}
+
+function gcalUrl(title, startISO, endISO, location, details){
+  const fmt = s => s.replace(/[-:]/g,'').split('.')[0];
+  const start = fmt(new Date(startISO).toISOString());
+  const end = fmt(new Date(endISO).toISOString());
+  const params = new URLSearchParams({
+    action:'TEMPLATE', text:title, dates:`${start}/${end}`,
+    details, location
+  });
+  return `https://calendar.google.com/calendar/render?${params.toString()}`;
+}
+
+function mapsUrlFor(address, override){
+  if (override) return override;
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
+}
+
+(function populate(){
+  const g = CONFIG.groom, b = CONFIG.bride;
+  document.getElementById('gate-to').textContent = 'Kepada Bapak/Ibu/Saudara/i';
+  document.getElementById('gate-names').textContent = `${g.nickname} & ${b.nickname}`;
+  document.getElementById('cover-groom').textContent = g.nickname;
+  document.getElementById('cover-bride').textContent = b.nickname;
+  document.getElementById('closing-names').innerHTML = `${g.nickname} &amp; ${b.nickname}`;
+
+  const earliest = new Date(Math.min(new Date(CONFIG.akad.date), new Date(CONFIG.resepsi.date)));
+  document.getElementById('cover-date').textContent = fmtDateHuman(earliest) + ' · ' + CONFIG.venueName;
+
+  document.getElementById('groom-name').textContent = g.name;
+  document.getElementById('groom-parents').innerHTML = `Putra dari<br>Bapak ${g.father} &amp; Ibu ${g.mother}`;
+  document.getElementById('bride-name').textContent = b.name;
+  document.getElementById('bride-parents').innerHTML = `Putri dari<br>Bapak ${b.father} &amp; Ibu ${b.mother}`;
+
+  document.getElementById('story-1').textContent = CONFIG.story.metAt;
+  document.getElementById('story-2').textContent = CONFIG.story.proposal;
+  document.getElementById('story-3').textContent = CONFIG.story.married;
+
+  // events
+  const akadStart = new Date(CONFIG.akad.date);
+  const akadEnd = new Date(akadStart.getTime() + 2*60*60*1000);
+  document.getElementById('akad-when').textContent = fmtDateHuman(akadStart);
+  document.getElementById('akad-where').textContent = ``;
+  document.getElementById('akad-cal-link').href = gcalUrl(
+    `Akad Nikah ${g.name} & ${b.name}`, akadStart.toISOString(), akadEnd.toISOString(),
+    CONFIG.akad.address, `Akad Nikah ${g.name} & ${b.name} di ${CONFIG.akad.venue}`
+  );
+
+  const resStart = new Date(CONFIG.resepsi.date);
+  const resEnd = new Date(resStart.getTime() + 3*60*60*1000);
+  document.getElementById('resepsi-when').textContent = fmtDateHuman(resStart);
+  document.getElementById('resepsi-where').textContent = `${CONFIG.resepsi.venue}`;
+  document.getElementById('resepsi-cal-link').href = gcalUrl(
+    `Resepsi Pernikahan ${g.name} & ${b.name}`, resStart.toISOString(), resEnd.toISOString(),
+    CONFIG.resepsi.address, `Resepsi Pernikahan ${g.name} & ${b.name} di ${CONFIG.resepsi.venue}`
+  );
+
+  document.getElementById('venue-name').textContent = CONFIG.venueName;
+  document.getElementById('venue-address').textContent = CONFIG.venueAddress;
+  document.getElementById('map-link').href = mapsUrlFor(CONFIG.venueAddress, CONFIG.googleMapsUrl);
+
+  document.getElementById('bank-account').textContent = CONFIG.gift.bankAccount;
+  document.getElementById('gift-address').textContent = CONFIG.gift.address;
+})();
+
+/* ---------------- Gate ---------------- */
+document.getElementById('open-btn').addEventListener('click', () => {
+  document.getElementById('gate').classList.add('hidden');
+  const audio = document.getElementById('bg-audio');
+  audio.play().then(() => {
+    document.getElementById('music-btn').classList.add('playing');
+    document.getElementById('music-btn').setAttribute('aria-pressed','true');
+  }).catch(() => { /* autoplay blocked — user can tap the music button */ });
+});
+
+/* ---------------- Music toggle ---------------- */
+document.getElementById('music-btn').addEventListener('click', () => {
+  const audio = document.getElementById('bg-audio');
+  const btn = document.getElementById('music-btn');
+  if (audio.paused){
+    audio.play().catch(()=>{});
+    btn.classList.add('playing'); btn.setAttribute('aria-pressed','true');
+  } else {
+    audio.pause();
+    btn.classList.remove('playing'); btn.setAttribute('aria-pressed','false');
+  }
+});
+
+/* ---------------- Countdown ---------------- */
+(function countdown(){
+  const target = new Date(Math.min(new Date(CONFIG.akad.date), new Date(CONFIG.resepsi.date)));
+  function tick(){
+    const diff = target - new Date();
+    const els = {d:document.getElementById('cd-days'), h:document.getElementById('cd-hours'),
+                 m:document.getElementById('cd-mins'), s:document.getElementById('cd-secs')};
+    if (diff <= 0){ els.d.textContent='00'; els.h.textContent='00'; els.m.textContent='00'; els.s.textContent='00'; return; }
+    const s = Math.floor(diff/1000);
+    const days = Math.floor(s/86400);
+    const hours = Math.floor((s%86400)/3600);
+    const mins = Math.floor((s%3600)/60);
+    const secs = s%60;
+    els.d.textContent = String(days).padStart(2,'0');
+    els.h.textContent = String(hours).padStart(2,'0');
+    els.m.textContent = String(mins).padStart(2,'0');
+    els.s.textContent = String(secs).padStart(2,'0');
+  }
+  tick(); setInterval(tick, 1000);
+})();
+
+/* ---------------- Reveal on scroll ---------------- */
+(function reveal(){
+  const items = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)){ items.forEach(el=>el.classList.add('in')); return; }
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold:0.15 });
+  items.forEach(el=>io.observe(el));
+})();
+
+/* ---------------- RSVP form ---------------- */
+let attendance = null;
+const btnAttend = document.getElementById('btn-attend');
+const btnNotAttend = document.getElementById('btn-not-attend');
+const guestWrap = document.getElementById('guest-count-wrap');
+
+function setAttendance(val){
+  attendance = val;
+  btnAttend.classList.toggle('active', val === 'Attending');
+  btnNotAttend.classList.toggle('active', val === 'Not Attending');
+  guestWrap.style.display = val === 'Attending' ? 'block' : 'none';
+}
+btnAttend.addEventListener('click', () => setAttendance('Attending'));
+btnNotAttend.addEventListener('click', () => setAttendance('Not Attending'));
+
+document.getElementById('rsvp-form').addEventListener('submit', async function(e){
+  e.preventDefault();
+  const status = document.getElementById('rsvp-status');
+  const submitBtn = document.getElementById('rsvp-submit');
+  const name = document.getElementById('f-name').value.trim();
+
+  if (!name){ status.textContent = 'Mohon isi nama Anda.'; status.className='err'; return; }
+  if (!attendance){ status.textContent = 'Mohon pilih konfirmasi kehadiran.'; status.className='err'; return; }
+
+  const payload = {
+    name,
+    attendance,
+    guests: attendance === 'Attending' ? (parseInt(document.getElementById('f-guests').value,10) || 1) : 0,
+    message: document.getElementById('f-message').value.trim()
+  };
+
+  if (!CONFIG.scriptUrl){
+    status.textContent = 'Mode pratinjau: hubungkan Google Apps Script URL di CONFIG untuk menyimpan RSVP ke Google Sheets.';
+    status.className = 'err';
+    return;
+  }
+
+  submitBtn.disabled = true;
+  status.textContent = 'Mengirim...';
+  status.className = '';
+
+  try{
+    // no-cors: Apps Script web apps don't return CORS headers to fetch,
+    // so we send the request and optimistically confirm on success of the network call.
+    await fetch(CONFIG.scriptUrl, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ action: 'rsvp', ...payload })
+    });
+    status.textContent = 'Terima kasih! RSVP Anda telah kami terima.';
+    status.className = 'ok';
+    this.reset();
+    setAttendance(null);
+    guestWrap.style.display = 'none';
+    loadWishes();
+  } catch(err){
+    status.textContent = 'Gagal mengirim. Periksa koneksi internet Anda dan coba lagi.';
+    status.className = 'err';
+  } finally {
+    submitBtn.disabled = false;
+  }
+});
+
+/* ---------------- Wishes wall ---------------- */
+async function loadWishes(){
+  const list = document.getElementById('wishes-list');
+  if (!CONFIG.scriptUrl){
+    list.innerHTML = '<div class="wishes-empty">Hubungkan Google Apps Script URL di CONFIG untuk menampilkan ucapan dari tamu.</div>';
+    return;
+  }
+  list.innerHTML = '<div class="wishes-empty">Memuat ucapan...</div>';
+  try{
+    const res = await fetch(`${CONFIG.scriptUrl}?action=wishes&t=${Date.now()}`);
+    const data = await res.json();
+    if (!data.wishes || !data.wishes.length){
+      list.innerHTML = '<div class="wishes-empty">Jadilah yang pertama mengirimkan ucapan!</div>';
+      return;
+    }
+    list.innerHTML = data.wishes.slice().reverse().map(w => `
+      <div class="wish-card">
+        <div class="who">${escapeHtml(w.name)}</div>
+        <div class="status">${w.attendance === 'Attending' ? 'Akan hadir' : 'Tidak dapat hadir'}</div>
+        <div class="msg">${escapeHtml(w.message || '')}</div>
+      </div>
+    `).join('');
+  } catch(err){
+    list.innerHTML = '<div class="wishes-empty">Tidak dapat memuat ucapan saat ini.</div>';
+  }
+}
+function escapeHtml(str){
+  const d = document.createElement('div'); d.textContent = str; return d.innerHTML;
+}
+document.getElementById('wishes-refresh').addEventListener('click', loadWishes);
+loadWishes();
+// light auto-refresh so new wishes appear without a manual reload
+setInterval(loadWishes, 45000);
+
+/* ---------------- Copy to clipboard ---------------- */
+document.querySelectorAll('.copy-btn').forEach(btn=>{
+  btn.addEventListener('click', () => {
+    const target = document.getElementById(btn.dataset.copyTarget);
+    const text = target.textContent.trim();
+    navigator.clipboard?.writeText(text).then(()=>{
+      const orig = btn.textContent; btn.textContent = 'Tersalin!';
+      setTimeout(()=>{ btn.textContent = orig; }, 1500);
+    }).catch(()=>{});
+  });
+});
+</script>
+</body>
+</html>
